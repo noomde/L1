@@ -26,8 +26,11 @@ class Hello extends HTMLElement {
     this.userName.removeEventListener('keypress', this.handleKeyPress.bind(this))
   }
 
-  handleKeyPress() {
-
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this.countVowels()
+    }
   }
 
   countVowels() {
@@ -38,3 +41,5 @@ class Hello extends HTMLElement {
 
   }
 }
+
+customElements.define('Hello', Hello)
