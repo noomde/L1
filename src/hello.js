@@ -25,4 +25,16 @@ class Hello extends HTMLElement {
   disconnectedCallback() {
     this.userName.removeEventListener('keypress', this.handleKeyPress.bind(this))
   }
+
+  handleKeyPress() {
+
+  }
+
+  countVowels() {
+    
+  }
+
+  renderVowels() {
+
+  }
 }
