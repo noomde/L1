@@ -1,7 +1,8 @@
 const template = document.createElement('template')
 template.innerHTML = `
     <div class="main">
-    <input type="text" class="userName">
+    <input type="text" class="userName" placeholder="Enter your first name!">
+    <p class="hello-vowels"></p>
     </div>
 `
 
@@ -36,18 +37,22 @@ class Hello extends HTMLElement {
   countVowels() {
     const nameValue = this.userName.value.toLowerCase().trim()
     let vowels = 0
+    let indexOfVowel = []
 
     for (let i = 0; i < nameValue.length; i++) {
       if ('aeiou'.includes(nameValue[i])) {
         vowels++
+        indexOfVowel.push(i)
       }
     }
 
-    this.renderVowels(vowels)
+    this.renderVowels(vowels, indexOfVowel)
   }
 
-  renderVowels(count) {
+  renderVowels(count, index) {
+    const nameSpan = this.shadowRoot.querySelector('.hello-vowels')
 
+    nameSpan.textContent = `Your name includes ${count} vowels on ${index.join(', ')}.`
   }
 }
 
