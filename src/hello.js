@@ -19,7 +19,7 @@ class Hello extends HTMLElement {
   }
 
   connectedCallback() {
-    this.userName.addEventListener('keypress', this.handleKeypress.bind(this))
+    this.userName.addEventListener('keypress', this.handleKeyPress.bind(this))
   }
 
   disconnectedCallback() {
@@ -34,12 +34,21 @@ class Hello extends HTMLElement {
   }
 
   countVowels() {
-    
+    const nameValue = this.userName.value.toLowerCase().trim()
+    let vowels = 0
+
+    for (let i = 0; i < nameValue.length; i++) {
+      if ('aeiou'.includes(nameValue[i])) {
+        vowels++
+      }
+    }
+
+    this.renderVowels(vowels)
   }
 
-  renderVowels() {
+  renderVowels(count) {
 
   }
 }
 
-customElements.define('Hello', Hello)
+customElements.define('Hello-Hello', Hello)
