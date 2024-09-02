@@ -11,8 +11,8 @@ template.innerHTML = `
  */
 class Hello extends HTMLElement {
 
-  constructor () {
-    super() 
+  constructor() {
+    super()
     this.attachShadow({ mode: 'open' })
       .appendChild(template.content.cloneNode(true))
 
@@ -52,7 +52,13 @@ class Hello extends HTMLElement {
   renderVowels(count, index) {
     const nameSpan = this.shadowRoot.querySelector('.hello-vowels')
 
-    nameSpan.textContent = `Your name includes ${count} vowels on ${index.join(', ')}.`
+    if (count != undefined) {
+      nameSpan.textContent = `Your name includes ${count} vowels on ${index.join(', ')}.`
+    } else if (this.userName.value == undefined) {
+      nameSpan.textContent = 'Please write a name or atleast a word!!!'
+    } else {
+      nameSpan.textContent = 'The name/word you entered has no vowels.'
+    }
   }
 }
 
