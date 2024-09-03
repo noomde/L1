@@ -7,10 +7,17 @@ template.innerHTML = `
 `
 
 /**
+ * Maybe allow the user to input first and lastname
+ */
+
+/**
  * Gets a input from the user and converts tells the user how many vowels the user's name has.
  */
 class Hello extends HTMLElement {
 
+  /**
+   * The constructor.
+   */
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
@@ -19,14 +26,25 @@ class Hello extends HTMLElement {
     this.userName = this.shadowRoot.querySelector('.userName')
   }
 
+  /**
+   * The connected callback.
+   */
   connectedCallback() {
     this.userName.addEventListener('keypress', this.handleKeyPress.bind(this))
   }
 
+  /**
+   * The disconnected callback
+   */
   disconnectedCallback() {
     this.userName.removeEventListener('keypress', this.handleKeyPress.bind(this))
   }
 
+  /**
+   * Makes sure the users keypress works.
+   *
+   * @param {Event} e - Handles the users keypress
+   */
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
@@ -34,6 +52,25 @@ class Hello extends HTMLElement {
     }
   }
 
+  /**
+   * Checks the users input.
+   *
+   * @returns { 1 | 2| 3 } - Returns a number depending on the users input.
+   */
+  checkInput() {
+    const name = this.userName.value.trim()
+    if (name == undefined) {
+      return 1
+    } else if (name.length < 2) {
+      return 2
+    } else {
+      return 3
+    }
+  }
+
+  /**
+   * Counts the vowels in the users name.
+   */
   countVowels() {
     const nameValue = this.userName.value.toLowerCase().trim()
     let vowels = 0
@@ -49,15 +86,25 @@ class Hello extends HTMLElement {
     this.renderVowels(vowels, indexOfVowel)
   }
 
+  /**
+   * Renders the respons to the user.
+   *
+   * @param {number} count - The number of vowels.
+   * @param {number} index - The index of the vowels
+   */
   renderVowels(count, index) {
     const nameSpan = this.shadowRoot.querySelector('.hello-vowels')
 
-    if (count != undefined) {
-      nameSpan.textContent = `Your name includes ${count} vowels on ${index.join(', ')}.`
-    } else if (this.userName.value == undefined) {
+    const checkedName = this.checkInput()
+
+    if (checkedName == 3) {
+      nameSpan.textContent = `Your name includes ${count} vowels on index ${index.join(', ')}.`
+    } else if (checkedName == 1) {
       nameSpan.textContent = 'Please write a name or atleast a word!!!'
+    } else if (checkedName == 2) {
+      nameSpan.textContent = 'Please write a name longer than 2'
     } else {
-      nameSpan.textContent = 'The name/word you entered has no vowels.'
+      nameSpan.textContent = 'The name you entered has no vowels.'
     }
   }
 }
