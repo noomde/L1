@@ -55,11 +55,11 @@ class Hello extends HTMLElement {
    */
   checkInput() {
     const name = this.userName.value.trim()
-    if (name == undefined) {
+    if (name === undefined) {
       return 1
     } else if (name.length < 2) {
       return 2
-    } else if (name.split(' ') > 1) {
+    } else if (name.split(' ').length > 1) {
       const fullName = name.split(' ')
       return fullName
     } else {
@@ -104,8 +104,6 @@ class Hello extends HTMLElement {
       nameSpan.textContent = 'Please write a name longer than 2'
     } else if (Array.isArray(checkedName)) {
       nameSpan.textContent = `Your full name includes ${count} vowels on index ${index.join(', ')}.`
-    } else {
-      nameSpan.textContent = 'The name you entered has no vowels.'
     }
   }
 }
