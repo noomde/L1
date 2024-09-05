@@ -7,10 +7,6 @@ template.innerHTML = `
 `
 
 /**
- * Maybe allow the user to input first and lastname
- */
-
-/**
  * Gets a input from the user and converts tells the user how many vowels the user's name has.
  */
 class Hello extends HTMLElement {
@@ -55,7 +51,7 @@ class Hello extends HTMLElement {
   /**
    * Checks the users input.
    *
-   * @returns { 1 | 2| 3 } - Returns a number depending on the users input.
+   * @returns { 1 | 2| 3 | Array} - Returns a number/array depending on the users input.
    */
   checkInput() {
     const name = this.userName.value.trim()
@@ -63,6 +59,9 @@ class Hello extends HTMLElement {
       return 1
     } else if (name.length < 2) {
       return 2
+    } else if (name.split(' ') > 1) {
+      const fullName = name.split(' ')
+      return fullName
     } else {
       return 3
     }
@@ -103,6 +102,8 @@ class Hello extends HTMLElement {
       nameSpan.textContent = 'Please write a name or atleast a word!!!'
     } else if (checkedName == 2) {
       nameSpan.textContent = 'Please write a name longer than 2'
+    } else if (Array.isArray(checkedName)) {
+      nameSpan.textContent = `Your full name includes ${count} vowels on index ${index.join(', ')}.`
     } else {
       nameSpan.textContent = 'The name you entered has no vowels.'
     }
