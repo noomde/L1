@@ -77,7 +77,7 @@ class Hello extends HTMLElement {
     let indexOfVowel = []
 
     for (let i = 0; i < nameValue.length; i++) {
-      if ('aeiou'.includes(nameValue[i])) {
+      if ('aeiouåäö'.includes(nameValue[i])) {
         vowels++
         indexOfVowel.push(i)
       }
