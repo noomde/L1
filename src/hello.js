@@ -1,5 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
+    <link rel="stylesheet" href="../public/style.css">
     <div class="main">
     <input type="text" class="userName" placeholder="Enter your first name!">
     <p class="hello-vowels"></p>
@@ -55,7 +56,7 @@ class Hello extends HTMLElement {
    */
   checkInput() {
     const name = this.userName.value.trim()
-    if (name === undefined) {
+    if (name === '') {
       return 1
     } else if (name.length < 2) {
       return 2
@@ -108,4 +109,4 @@ class Hello extends HTMLElement {
   }
 }
 
-customElements.define('Hello-Hello', Hello)
+customElements.define('hello-hello', Hello)
