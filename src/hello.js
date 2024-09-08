@@ -1,6 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
-    <link rel="stylesheet" href="../public/style.css">
+    <link rel="stylesheet" href="/style.css">
     <div class="main">
     <input type="text" class="userName" placeholder="Enter your first name!">
     <p class="hello-vowels"></p>
